@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
+		<LangVersion>14.0</LangVersion>
+		<Nullable>enable</Nullable>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>keypair.snk</AssemblyOriginatorKeyFile>
+		<Authors>RiceTea (new1271)</Authors>
+		<Copyright>Copyright © RiceTea (new1271) 2026</Copyright>
+		<Description>Dissolves the Span and ReadOnlySpan into references</Description>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
+		<PackageOutputPath>$(SolutionDir)/nugets</PackageOutputPath>
+		<PackageProjectUrl>https://github.com/Fody/Home/tree/master/BasicFodyAddin</PackageProjectUrl>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fody" Version="6.9.3" PrivateAssets="none" />
+		<PackageReference Include="FodyPackaging" Version="6.9.3" PrivateAssets="All" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+		<PackageReference Include="PolySharp" Version="1.15.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- Only for develop use!-->
+		<PackageReference Include="System.Memory" Version="4.6.3">
+			<PrivateAssets>all</PrivateAssets>
+			<ExcludeAssets>runtime</ExcludeAssets>
+			<IncludeAssets>compile; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+</Project>

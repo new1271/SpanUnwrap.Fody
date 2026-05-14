@@ -1,0 +1,43 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>14.0</LangVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<WeaverConfiguration>
+			<Weavers>
+				<InlineIL />
+				<SpanDissolveInSolution />
+				<InlineMethod />
+			</Weavers>
+		</WeaverConfiguration>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Fody" Version="6.9.3">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="InlineIL.Fody" Version="1.10.2">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="InlineMethod.Fody" Version="0.8.7">
+			<PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="PolySharp" Version="1.15.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+
+		<!-- Only for develop use!-->
+		<PackageReference Include="System.Memory" Version="4.6.3"/>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\SpanDissolve\SpanDissolve.csproj" PrivateAssets="all" />
+	</ItemGroup>
+
+	<Import Project="..\SpanDissolve.InSolutionWeaver\SpanDissolve.InSolutionWeaver.props" />
+</Project>

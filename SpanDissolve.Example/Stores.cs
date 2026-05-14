@@ -1,8 +1,7 @@
 using System;
+using System.Runtime.CompilerServices;
 
 using InlineIL;
-
-using InlineMethod;
 
 namespace SpanDissolve.Example;
 
@@ -54,7 +53,7 @@ public static class Stores
 
     public static byte ShowData2(ReadOnlySpan<byte> source) => source.GetPinnableReference();
 
-    [Inline(InlineBehavior.Remove)]
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private static void CopyBlockUnaligned(ref byte destination, ref readonly byte source, nuint byteCount)
     {
         IL.Emit.Ldarg_0();

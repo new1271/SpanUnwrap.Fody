@@ -1,0 +1,1 @@
+# SpanPassthrough.Fody

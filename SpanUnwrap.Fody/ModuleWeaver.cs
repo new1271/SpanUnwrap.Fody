@@ -234,14 +234,15 @@ public class ModuleWeaver : BaseModuleWeaver
             typeDefinition.MakeGenericInstanceType(signature.GenericArguments),
             signature.GenericArguments[0]);
 
-        ReplaceCalleeToGetPinnableReference(processor, instruction, typeDefinition, realType);
-        ReplaceValueLoadToAddressLoad(processor, previousInstruction, realType);
+        ReplaceCalleeToGetPinnableReference(processor, instruction, previousInstruction, typeDefinition, realType);
 
         return;
     }
 
-    private void ReplaceCalleeToGetPinnableReference(ILProcessor processor, Instruction instruction, TypeDefinition typeDefinition, TypeReference realType)
+    private void ReplaceCalleeToGetPinnableReference(ILProcessor processor, Instruction instruction, Instruction previousInstruction, TypeDefinition typeDefinition, TypeReference realType)
     {
+        ReplaceValueLoadToAddressLoad(processor, previousInstruction, realType);
+
         MethodDefinition method = typeDefinition.Methods.Where(method => method.Name == "GetPinnableReference").First();
         GenericParameter typeParameterT = typeDefinition.GenericParameters[0];
         GenericParameter referenceToT = typeParameterT;

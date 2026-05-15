@@ -3,8 +3,8 @@
 This is an add-in for [Fody](https://github.com/Fody/Fody) which lets you unwraps `Span<T>` and `ReadOnlySpan<T>` in compile time.
 
 ## Installation
-*(Note: The following configurations are intended for SDK-style projects)*<br/><br/>
-### **1. Core Packages and Settings**<br/>
+*(Note: The following configurations are intended for SDK-style projects)*
+### **1. Core Packages and Settings**
 - Install the NuGet packages [`Fody`](https://www.nuget.org/packages/Fody) and [`SpanUnwrap.Fody`](https://www.nuget.org/packages/SpanUnwrap.Fody). Installing `Fody` explicitly is needed to enable weaving.
   
   ```xml
@@ -27,7 +27,7 @@ This is an add-in for [Fody](https://github.com/Fody/Fody) which lets you unwrap
   ```
 See [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md) for general guidelines, and [Fody Configuration](https://github.com/Fody/Home/blob/master/pages/configuration.md) for additional options.
 
-### **2. Legacy Framework Support**<br/>
+### **2. Legacy Framework Support**
 If your project targets **.NET Standard 2.0 (or lower)**, **.NET Core 2.x (or lower)**, or **.NET Framework**, you must include `System.Memory` manually.
 
   ```xml
@@ -43,6 +43,6 @@ If your project targets **.NET Standard 2.0 (or lower)**, **.NET Core 2.x (or lo
   ```
 
 ## Usage
-Use the `SpanUnwrap.Unwrap()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.<br/><br/>
+Use the `SpanUnwrap.Unwrap()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.
 
 See the [GitHub repository](https://github.com/new1271/SpanUnwrap.Fody#usage) for more information.

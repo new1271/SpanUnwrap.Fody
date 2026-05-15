@@ -11,7 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\SpanDissolve.Fody\SpanDissolve.Fody.csproj" />
+	  <ProjectReference Include="..\SpanUnwrap.Fody\SpanUnwrap.Fody.csproj" />
 	</ItemGroup>
 
 </Project>

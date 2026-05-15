@@ -4,11 +4,11 @@ using Fody;
 
 using Mono.Cecil;
 
-namespace SpanDissolve.InSolutionWeaver;
+namespace SpanUnwrap.InSolutionWeaver;
 
-public class SpanDissolveInSolution : ModuleWeaver
+public class SpanUnwrapInSolution : ModuleWeaver
 {
-    static SpanDissolveInSolution()
+    static SpanUnwrapInSolution()
     {
         GC.KeepAlive(typeof(ModuleDefinition));
         GC.KeepAlive(typeof(WeavingException));

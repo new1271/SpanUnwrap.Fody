@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SpanUnwrap.Example/SpanUnwrap.Example.csproj" Id="ebee4308-10cc-4d36-8c41-1c2e7123da8b" />
+  <Project Path="SpanUnwrap.Fody/SpanUnwrap.Fody.csproj" Id="c6c1f2d0-e6c2-4973-88e5-41bf8463b5bd" />
+  <Project Path="SpanUnwrap.InSolutionWeaver/SpanUnwrap.InSolutionWeaver.csproj" />
+  <Project Path="SpanUnwrap/SpanUnwrap.csproj" />
+</Solution>

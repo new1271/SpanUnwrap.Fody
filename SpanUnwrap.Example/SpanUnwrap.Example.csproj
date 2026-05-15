@@ -9,7 +9,7 @@
 		<WeaverConfiguration>
 			<Weavers>
 				<InlineIL />
-				<SpanDissolveInSolution />
+				<SpanUnwrapInSolution />
 			</Weavers>
 		</WeaverConfiguration>
 	</PropertyGroup>
@@ -32,8 +32,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\SpanDissolve\SpanDissolve.csproj" PrivateAssets="all" />
+		<ProjectReference Include="..\SpanUnwrap\SpanUnwrap.csproj" PrivateAssets="all" />
 	</ItemGroup>
 
-	<Import Project="..\SpanDissolve.InSolutionWeaver\SpanDissolve.InSolutionWeaver.props" />
+	<Import Project="..\SpanUnwrap.InSolutionWeaver\SpanUnwrap.InSolutionWeaver.props" />
 </Project>

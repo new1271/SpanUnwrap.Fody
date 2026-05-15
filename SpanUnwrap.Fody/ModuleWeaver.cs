@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 using Fody;
@@ -17,8 +16,8 @@ public class ModuleWeaver : BaseModuleWeaver
     private enum MethodIndex
     {
         None,
-        Dissolve_Span,
-        Dissolve_ReadOnlySpan
+        Unwrap_Span,
+        Unwrap_ReadOnlySpan
     }
 
     private enum SpanTypeIndex
@@ -34,7 +33,7 @@ public class ModuleWeaver : BaseModuleWeaver
 
     public override void Execute()
     {
-        WriteMessage("SpanDissolve execute", MessageImportance.High);
+        WriteMessage("SpanUnwrap execute", MessageImportance.High);
 
         foreach (TypeDefinition type in ModuleDefinition.GetTypes())
         {
@@ -60,9 +59,9 @@ public class ModuleWeaver : BaseModuleWeaver
                 goto Tail;
             switch (GetMethodIndex(callee, out MethodSignature signature))
             {
-                case MethodIndex.Dissolve_Span:
-                case MethodIndex.Dissolve_ReadOnlySpan:
-                    DissolveSpan(body, instruction, signature);
+                case MethodIndex.Unwrap_Span:
+                case MethodIndex.Unwrap_ReadOnlySpan:
+                    UnwrapSpan(body, instruction, signature);
                     goto Tail;
                 default:
                     goto Tail;
@@ -80,8 +79,8 @@ public class ModuleWeaver : BaseModuleWeaver
             !definition.HasParameters ||
             !definition.HasGenericParameters ||
             !definition.IsStatic ||
-            !string.Equals(definition.Name, "Dissolve") ||
-            !string.Equals(definition.DeclaringType.FullName, "SpanDissolve.SpanDissolver"))
+            !string.Equals(definition.Name, "Unwrap") ||
+            !string.Equals(definition.DeclaringType.FullName, "SpanUnwrap.SpanUnwrap"))
             goto Failed;
 
         Collection<GenericParameter> genericParameters = definition.GenericParameters;
@@ -117,8 +116,8 @@ public class ModuleWeaver : BaseModuleWeaver
 
         return GetSpanTypeIndexForType(instanceType, genericParameter) switch
         {
-            SpanTypeIndex.Span => MethodIndex.Dissolve_Span,
-            SpanTypeIndex.ReadOnlySpan => MethodIndex.Dissolve_ReadOnlySpan,
+            SpanTypeIndex.Span => MethodIndex.Unwrap_Span,
+            SpanTypeIndex.ReadOnlySpan => MethodIndex.Unwrap_ReadOnlySpan,
             _ => MethodIndex.None
         };
 
@@ -200,10 +199,10 @@ public class ModuleWeaver : BaseModuleWeaver
         processor.Remove(toInclusive);
     }
 
-    private void DissolveSpan(MethodBody body, Instruction instruction, in MethodSignature signature)
+    private void UnwrapSpan(MethodBody body, Instruction instruction, in MethodSignature signature)
     {
         /*
-        * current instruction: call SpanDissolver.Dissolve<T>(ref T)
+        * current instruction: call SpanUnwrap.Unwrap<T>(ref T)
         * previous instruction we need: newobj Span.ctor<T>(void*, int)
         */
         Instruction? previousInstruction = FindPreviousInstruction(instruction);

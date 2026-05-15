@@ -10,7 +10,7 @@
 		<Copyright>Copyright © RiceTea (new1271) 2026</Copyright>
 		<Description>Unwraps the Span&lt;T&gt; and ReadOnlySpan&lt;T&gt; into references</Description>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageTags>ILWeaving, Fody, Cecil, AOP</PackageTags>
+		<PackageTags>Span, Unwrap, ILWeaving, Fody, Cecil, AOP</PackageTags>
 		<PackageOutputPath>$(SolutionDir)/nugets</PackageOutputPath>
 		<PackageProjectUrl>https://github.com/new1271/SpanUnwrap.Fody</PackageProjectUrl>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>

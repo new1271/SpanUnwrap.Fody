@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
@@ -14,8 +14,13 @@
 		<PackageOutputPath>$(SolutionDir)/nugets</PackageOutputPath>
 		<PackageProjectUrl>https://github.com/new1271/SpanUnwrap.Fody</PackageProjectUrl>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<PackageReadmeFile>package_README.md</PackageReadmeFile>
 	</PropertyGroup>
-
+	
+	<ItemGroup>
+		<None Include="./package_README.md" Pack="true" PackagePath="/"/>
+	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="Fody" Version="6.9.3" PrivateAssets="none" />
 		<PackageReference Include="FodyPackaging" Version="6.9.3" PrivateAssets="All" />

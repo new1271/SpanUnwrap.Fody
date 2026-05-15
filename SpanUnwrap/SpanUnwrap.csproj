@@ -6,6 +6,7 @@
 		<Nullable>enable</Nullable>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>keypair.snk</AssemblyOriginatorKeyFile>
+		<AssemblyVersion>1.1.0</AssemblyVersion>
 		<Authors>RiceTea (new1271)</Authors>
 		<Copyright>Copyright © RiceTea (new1271) 2026</Copyright>
 		<Description>Unwraps the Span&lt;T&gt; and ReadOnlySpan&lt;T&gt; into references</Description>
@@ -13,8 +14,9 @@
 		<PackageTags>Span, Unwrap, ILWeaving, Fody, Cecil, AOP</PackageTags>
 		<PackageOutputPath>$(SolutionDir)/nugets</PackageOutputPath>
 		<PackageProjectUrl>https://github.com/new1271/SpanUnwrap.Fody</PackageProjectUrl>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<PackageReadmeFile>package_README.md</PackageReadmeFile>
+		<PackageVersion>1.1.0</PackageVersion>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 	
 	<ItemGroup>

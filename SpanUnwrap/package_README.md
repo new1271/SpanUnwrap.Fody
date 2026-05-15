@@ -43,6 +43,6 @@ If your project targets **.NET Standard 2.0 (or lower)**, **.NET Core 2.x (or lo
   ```
 
 ## Usage
-Use the `SpanUnwrap.Unwrap()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.
+Use the `Unwrap.From()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.
 
 See the [GitHub repository](https://github.com/new1271/SpanUnwrap.Fody#usage) for more information.

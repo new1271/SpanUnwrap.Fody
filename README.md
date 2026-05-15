@@ -52,7 +52,7 @@ If your project targets **.NET Standard 2.0 (or lower)**, **.NET Core 2.x (or lo
   ```
 
 ## Usage
-Use the `SpanUnwrap.Unwrap()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.<br/><br/>
+Use the `Unwrap.From()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.<br/><br/>
 `SpanUnwrap.Fody` intercepts the call during compilation and optimizes the access based on the data source:
 - For the constant `ReadOnlySpan<T>` declarations: It will expose the "raw" data field, which is embedded by the compiler in your assembly, as a `ref readonly` reference.
 - For the `Span<T>` from `stackalloc`: It will expose the space you allocated from the stack as a `ref` reference.
@@ -69,7 +69,7 @@ public static void CopyData(ref byte destination)
     const int Length = 8;
     CopyBlockUnaligned(
         ref destination,
-        in SpanUnwrap.Unwrap(
+        in Unwrap.From(
             // a constant, length-sealed ReadOnlySpan<byte>.
             new byte[Length] { 0xFF, 0x5E, 0x30, 0x21, 0x44, 0x55, 0x55, 0x1A }
         ),

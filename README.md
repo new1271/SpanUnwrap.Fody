@@ -1,7 +1,7 @@
-# SpanDissolve.Fody
-[![NuGet package](https://img.shields.io/nuget/v/SpanDissolve.Fody.svg?logo=NuGet)](https://www.nuget.org/packages/SpanDissolve.Fody)
+# SpanUnwrap.Fody
+[![NuGet package](https://img.shields.io/nuget/v/SpanUnwrap.Fody.svg?logo=NuGet)](https://www.nuget.org/packages/SpanUnwrap.Fody)
 
-This is an add-in for [Fody](https://github.com/Fody/Fody) which lets you dissolves `Span<T>` and `ReadOnlySpan<T>` in compile time.
+This is an add-in for [Fody](https://github.com/Fody/Fody) which lets you unwraps `Span<T>` and `ReadOnlySpan<T>` in compile time.
 
 ---
 
@@ -14,20 +14,20 @@ This is an add-in for [Fody](https://github.com/Fody/Fody) which lets you dissol
 ## Installation
 *(Note: The following configurations are intended for SDK-style projects)*<br/><br/>
 ### **1. Core Packages and Settings**<br/>
-- Install the NuGet packages [`Fody`](https://www.nuget.org/packages/Fody) and [`SpanDissolve.Fody`](https://www.nuget.org/packages/SpanDissolve.Fody). Installing `Fody` explicitly is needed to enable weaving.
+- Install the NuGet packages [`Fody`](https://www.nuget.org/packages/Fody) and [`SpanUnwrap.Fody`](https://www.nuget.org/packages/SpanUnwrap.Fody). Installing `Fody` explicitly is needed to enable weaving.
   
   ```xml
   <PackageReference Include="Fody" Version="*" />
-  <PackageReference Include="SpanDissolve.Fody" Version="*" />
+  <PackageReference Include="SpanUnwrap.Fody" Version="*" />
   ```
-- Add the `PrivateAssets="all"` metadata attribute to the `<PackageReference />` items of `Fody` and `SpanDissolve.Fody` in your project file, so they won't be listed as dependencies.
+- Add the `PrivateAssets="all"` metadata attribute to the `<PackageReference />` items of `Fody` and `SpanUnwrap.Fody` in your project file, so they won't be listed as dependencies.
 
-- If you already have a `FodyWeavers.xml` file in the root directory of your project, add the `<SpanDissolve />` tag there. This file will be created on the first build if it doesn't exist:
+- If you already have a `FodyWeavers.xml` file in the root directory of your project, add the `<SpanUnwrap />` tag there. This file will be created on the first build if it doesn't exist:
 
   ```XML
   <?xml version="1.0" encoding="utf-8" ?>
   <Weavers>
-    <SpanDissolve />
+    <SpanUnwrap />
   </Weavers>
   ```
 See [Fody usage](https://github.com/Fody/Home/blob/master/pages/usage.md) for general guidelines, and [Fody Configuration](https://github.com/Fody/Home/blob/master/pages/configuration.md) for additional options.
@@ -48,8 +48,8 @@ If your project targets **.NET Standard 2.0 (or lower)**, **.NET Core 2.x (or lo
   ```
 
 ## Usage
-Use the `SpanDissolver.Dissolve()` method to deconstruct a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.<br/><br/>
-`SpanDissolver.Fody` intercepts the call during compilation and optimizes the access based on the data source:
+Use the `SpanUnwrap.Unwrap()` method to unwrap a `Span<T>` or `ReadOnlySpan<T>` at compile time and expose its underlying storage directly.<br/><br/>
+`SpanUnwrap.Fody` intercepts the call during compilation and optimizes the access based on the data source:
 - For the constant `ReadOnlySpan<T>` declarations: It will expose the "raw" data field, which is embedded by the compiler in your assembly, as a `ref readonly` reference.
 - For the `Span<T>` from `stackalloc`: It will expose the space you allocated from the stack as a `ref` reference.
 - For the other cases: It will automatically route the call to the `GetPinnableReference()` method in the `Span<T>` or `ReadOnlySpan<T>` instance.
@@ -65,7 +65,7 @@ public static void CopyData(ref byte destination)
     const int Length = 8;
     CopyBlockUnaligned(
         ref destination,
-        in SpanDissolver.Dissolve(
+        in SpanUnwrap.Unwrap(
             // a constant, length-sealed ReadOnlySpan<byte>.
             new byte[Length] { 0xFF, 0x5E, 0x30, 0x21, 0x44, 0x55, 0x55, 0x1A }
         ),
@@ -103,7 +103,7 @@ raw MSIL code:
     IL_0001: ldsflda int64 '<PrivateImplementationDetails>'::'70DE15E71C9CEE3760BB7174ECC485889F6F554DDDC4947D4ECAF87E48003025'
     IL_0006: ldc.i4.8
     IL_0007: conv.i
-    IL_0008: call void SpanDissolve.Example.Stores::CopyBlockUnaligned(uint8&, uint8&, native uint)
+    IL_0008: call void SpanUnwrap.Example.Stores::CopyBlockUnaligned(uint8&, uint8&, native uint)
     IL_000d: ret
 } // end of method Stores::CopyData
 

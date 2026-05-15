@@ -79,8 +79,8 @@ public class ModuleWeaver : BaseModuleWeaver
             !definition.HasParameters ||
             !definition.HasGenericParameters ||
             !definition.IsStatic ||
-            !string.Equals(definition.Name, "Unwrap") ||
-            !string.Equals(definition.DeclaringType.FullName, "SpanUnwrap.SpanUnwrap"))
+            !string.Equals(definition.Name, "From") ||
+            !string.Equals(definition.DeclaringType.FullName, "SpanUnwrap.Unwrap"))
             goto Failed;
 
         Collection<GenericParameter> genericParameters = definition.GenericParameters;

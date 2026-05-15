@@ -12,7 +12,7 @@ public static class Stores
         const int Length = 8;
         CopyBlockUnaligned(
             ref destination,
-            in SpanUnwrap.Unwrap(new byte[Length] { 0xFF, 0x5E, 0x30, 0x21, 0x44, 0x55, 0x55, 0x1A }),
+            in Unwrap.From(new byte[Length] { 0xFF, 0x5E, 0x30, 0x21, 0x44, 0x55, 0x55, 0x1A }),
             Length);
     }
 
@@ -20,7 +20,7 @@ public static class Stores
     {
         const int Length = 8;
 
-        ref byte destination = ref SpanUnwrap.Unwrap(stackalloc byte[Length]);
+        ref byte destination = ref Unwrap.From(stackalloc byte[Length]);
         CopyData(ref destination);
         return destination;
     }
@@ -29,10 +29,10 @@ public static class Stores
     {
         const int Length = 8;
 
-        ref byte destination = ref SpanUnwrap.Unwrap(stackalloc byte[Length]);
+        ref byte destination = ref Unwrap.From(stackalloc byte[Length]);
         CopyBlockUnaligned(
             ref destination,
-            in SpanUnwrap.Unwrap(new byte[Length] { 0xFE, 0x5C, 0x75, 0x22, 0x34, 0x15, 0x5C, 0x1A }),
+            in Unwrap.From(new byte[Length] { 0xFE, 0x5C, 0x75, 0x22, 0x34, 0x15, 0x5C, 0x1A }),
             Length);
         return destination;
     }
@@ -41,15 +41,15 @@ public static class Stores
     {
         const int Length = 8;
 
-        ref byte destination = ref SpanUnwrap.Unwrap(dest);
+        ref byte destination = ref Unwrap.From(dest);
         CopyBlockUnaligned(
             ref destination,
-            in SpanUnwrap.Unwrap(new byte[Length] { 0xFE, 0x5C, 0x75, 0x22, 0x34, 0x15, 0x5C, 0x1A }),
+            in Unwrap.From(new byte[Length] { 0xFE, 0x5C, 0x75, 0x22, 0x34, 0x15, 0x5C, 0x1A }),
             Length);
         return destination;
     }
 
-    public static byte ShowData(ReadOnlySpan<byte> source) => SpanUnwrap.Unwrap(source);
+    public static byte ShowData(ReadOnlySpan<byte> source) => Unwrap.From(source);
 
     public static byte ShowData2(ReadOnlySpan<byte> source) => source.GetPinnableReference();
 
